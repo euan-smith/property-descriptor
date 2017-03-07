@@ -1,0 +1,28 @@
+{
+  "name": "property-descriptor",
+  "version": "0.0.1",
+  "description": "An ES-5 object property descriptor factory",
+  "main": "prop.js",
+  "scripts": {
+    "test": "nyc mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zakalwe314/property-descriptor.git"
+  },
+  "keywords": [
+    "ES5",
+    "object",
+    "property",
+    "descriptor",
+    "defineProperty",
+    "defineProperties",
+    "Object.create"
+  ],
+  "author": "Euan Smith <euan1971@yahoo.co.uk> (https://github.com/zakalwe314)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zakalwe314/property-descriptor/issues"
+  },
+  "homepage": "https://github.com/zakalwe314/property-descriptor#readme"
+}
