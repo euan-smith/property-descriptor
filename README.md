@@ -1,4 +1,4 @@
-# property-descriptor
+# prop-d
 An ES-5 object property descriptor factory.
 
 ![tests](https://travis-ci.org/zakalwe314/property-descriptor.svg?branch=master)
@@ -9,12 +9,12 @@ Writing out object descriptors is tedius and not very DRY, however they can be v
 
 ## Install
 ```bash
-$ npm install property-descriptor --save-dev
+$ npm install prop-d --save-dev
 ```
 ##Usage
 Require it and define a property on an object:
 ```javascript
-const prop = require('property-descriptor');
+const prop = require('prop-d');
 
 const o = Object.defineProperty({},'p',prop(5));
 // o = {"p":5}

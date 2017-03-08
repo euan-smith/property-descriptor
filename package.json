@@ -1,5 +1,5 @@
 {
-  "name": "property-descriptor",
+  "name": "prop-d",
   "version": "1.0.0",
   "description": "An ES-5 object property descriptor factory",
   "main": "prop.js",
