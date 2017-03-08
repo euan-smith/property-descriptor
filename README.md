@@ -1,6 +1,8 @@
 # property-descriptor
 An ES-5 object property descriptor factory.
 
+## Description
+
 Writing out object descriptors is tedius and not very DRY, however they can be very useful.  This is a tiny (1.14k minified, 480 bytes gzipped) library to take away the tedium and make your code more readable.
 
 ## Install
@@ -130,3 +132,9 @@ npm test
 
 # Contributing
 In lieu of a coding style, please use the style of the existing code as an example.
+
+#License
+
+Copyright (c) 2017 Euan Smith
+
+MIT License
