@@ -19,6 +19,12 @@
     "defineProperties",
     "Object.create"
   ],
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "nyc": "^10.1.2"
+  },
+
   "author": "Euan Smith <euan1971@yahoo.co.uk> (https://github.com/zakalwe314)",
   "license": "MIT",
   "bugs": {
