@@ -1,6 +1,8 @@
 # property-descriptor
 An ES-5 object property descriptor factory.
 
+![tests](https://travis-ci.org/zakalwe314/property-descriptor.svg?branch=master)
+
 ## Description
 
 Writing out object descriptors is tedius and not very DRY, however they can be very useful.  This is a tiny (1.14k minified, 480 bytes gzipped) library to take away the tedium and make your code more readable.
