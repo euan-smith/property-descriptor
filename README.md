@@ -2,6 +2,7 @@
 An ES-5 object property descriptor factory.
 
 ![tests](https://travis-ci.org/zakalwe314/property-descriptor.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/zakalwe314/property-descriptor/badge.svg?branch=master)](https://coveralls.io/r/zakalwe314/property-descriptor?branch=master)
 
 ## Description
 
