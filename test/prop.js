@@ -19,6 +19,21 @@ describe('prop',function(){
     expect(t2).to.have.a.property('test').that.is.an.instanceOf(Array);
     expect(t1.test).to.not.equal(t2.test);
   });
+  it('defines an instance maintained through chaining', function(){
+    const d=prop(()=>[]).visible;
+    const t1=Object.defineProperty({},'test',d);
+    const t2=Object.defineProperty({},'test',d);
+    expect(t1).to.have.a.property('test').that.is.an.instanceOf(Array);
+    expect(t2).to.have.a.property('test').that.is.an.instanceOf(Array);
+    expect(t1.test).to.not.equal(t2.test);
+  });
+  it('chaining does not trigger the instance call', function(){
+    let cnt=0;
+    const d = prop(()=>++cnt).visible;
+    expect(cnt).to.equal(0);
+    Object.defineProperty({},'idx',d);
+    expect(cnt).to.equal(1);
+  });
   it('sets and clears enumerable', function(){
     expect(prop().hidden.enumerable).to.equal(false);
     expect(prop().hidden.visible.enumerable).to.equal(true);

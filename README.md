@@ -6,7 +6,8 @@ An ES-5 object property descriptor factory.
 
 ## Description
 
-Writing out object descriptors is tedius and not very DRY, however they can be very useful.  This is a tiny (1.14k minified, 480 bytes gzipped) library to take away the tedium and make your code more readable.
+Writing out object descriptors is tedius and not very DRY, however they can be very useful.  
+This is a tiny (1k minified, <0.5k gzipped) library to take away the tedium and make your code more readable.
 
 ## Install
 ```bash
@@ -124,9 +125,6 @@ const barProps = {
   _a2: privateArray
 }
 ```
-_NOTE_ that the chained properties modify the object, rather than returning a new instance, so when a prop reference is kept
-for future use, either use it as-is _or_ use it as a root method (which _does_ return a new instance).  DON'T modify with chained
-properties as this will modify _ALL_ instances.
 
 # Testing
 ```
@@ -135,6 +133,16 @@ npm test
 
 # Contributing
 In lieu of a coding style, please use the style of the existing code as an example.
+
+# Release History
+- 1.0.0 
+  - Initial release, all test passing
+- 1.0.1
+  - Added coveralls, 100% coverage
+- 1.1.0
+  - Made the chainable methods return new objects, no longer possible to accidentally modify a reference to a prop object - warning also removed from doc.
+  - Removed some code that had become unessesary due to the above change.
+  - Reduced the code size a little
 
 #License
 

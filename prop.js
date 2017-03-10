@@ -10,85 +10,80 @@ const defaultProp = {
   value: undefined
 };
 
+
 /**
  * @class Prop
  *
  */
 class Prop extends Function {
-  /**
-   *
-   * @param props
-   * @returns {*}
-   */
-  static makeRoot(props) {
-    const rtn = Prop.makeTarget();
-    for (let k of Object.keys(props)) {
-      const d = Object.getOwnPropertyDescriptor(props, k);
-      d.configurable = false;
-      d.writable = false;
-      Object.defineProperty(rtn, k, d);
-    }
-    return rtn;
+  _enum(v){
+    this.enumerable=v;
+    return this;
   }
 
-  static create(props) {
-    const rtn = Prop.makeTarget();
-    Object.setPrototypeOf(rtn, Prop.prototype);
-    Object.assign(rtn, props);
-    Object.defineProperty(rtn, 'value',
-      Object.assign(
-        Object.getOwnPropertyDescriptor(props, 'value'),
-        {configurable:true}
-        )
-    );
-    return rtn;
+  _writ(v){
+    this.writable=v;
+    return this;
   }
 
-  static makeTarget() {
-    const target = function (val, isMethod = false) {
-      var rtn = Prop.create(target);
-      if (arguments.length > 0) {
-        if (typeof val === 'function' && !isMethod) {
-          Object.defineProperty(rtn, 'value', {get: val});
-        } else {
-          Object.defineProperty(rtn, 'value', {value: val});
-        }
-      }
-      return rtn;
-    };
-    return target;
+  _conf(v){
+    this.configurable=v;
+    return this;
   }
-
 
   get hidden() {
-    this.enumerable = false;
-    return this
+    return create(this)._enum(false);
   }
 
   get visible() {
-    this.enumerable = true;
-    return this
+    return create(this)._enum(true);
   }
 
   get constant() {
-    this.writable = false;
-    return this
+    return create(this)._writ(false);
   }
 
   get variable() {
-    this.writable = true;
-    return this
+    return create(this)._writ(true);
   }
 
   get frozen() {
-    this.configurable = false;
-    return this
+    return create(this)._conf(false);
   }
 
   get thawed() {
-    this.configurable = true;
-    return this
+    return create(this)._conf(true);
   }
 }
 
-module.exports = Prop.makeRoot(defaultProp);
+function create(props) {
+  const prop = makeTarget();
+  Object.setPrototypeOf(prop, Prop.prototype);
+  prop._enum(props.enumerable);
+  prop._writ(props.writable);
+  prop._conf(props.configurable);
+  Object.defineProperty(prop, 'value',
+    Object.assign(
+      Object.getOwnPropertyDescriptor(props, 'value'),
+      {configurable:true}
+    )
+  );
+  return prop;
+}
+
+function makeTarget() {
+  const prop = function (val, isMethod) {
+    var rtn = create(prop);
+    if (arguments.length > 0) {
+      if (typeof val === 'function' && !isMethod) {
+        Object.defineProperty(rtn, 'value', {get: val});
+      } else {
+        Object.defineProperty(rtn, 'value', {value: val});
+      }
+    }
+    return rtn;
+  };
+  return prop;
+}
+
+module.exports = create(defaultProp);
