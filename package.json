@@ -12,6 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/zakalwe314/property-descriptor.git"
   },
+  "engines" : {
+    "node" : ">=6.0.0"
+  },
   "keywords": [
     "ES5",
     "object",

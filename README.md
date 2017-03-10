@@ -143,6 +143,10 @@ In lieu of a coding style, please use the style of the existing code as an examp
   - Made the chainable methods return new objects, no longer possible to accidentally modify a reference to a prop object - warning also removed from doc.
   - Removed some code that had become unessesary due to the above change.
   - Reduced the code size a little
+  - Added a restriction on node version to package.json
+
+# Todo
+- Remove ES6 dependency
 
 #License
 
