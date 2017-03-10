@@ -1,6 +1,6 @@
 {
   "name": "prop-d",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "An ES-5 object property descriptor factory",
   "main": "prop.js",
   "scripts": {
@@ -12,8 +12,8 @@
     "type": "git",
     "url": "git+https://github.com/zakalwe314/property-descriptor.git"
   },
-  "engines" : {
-    "node" : ">=6.0.0"
+  "engines": {
+    "node": ">=6.0.0"
   },
   "keywords": [
     "ES5",
