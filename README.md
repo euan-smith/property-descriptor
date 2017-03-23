@@ -145,7 +145,7 @@ In lieu of a coding style, please use the style of the existing code as an examp
   - Reduced the code size a little
   - Added a restriction on node version to package.json
 - 1.2.0
-  - Added a babel build process to remove ES6 requirement
+  - Removed much of ES6 dependency
 
 #License
 

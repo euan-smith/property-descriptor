@@ -89,3 +89,10 @@ function makeTarget() {
 }
 
 module.exports = create(defaultProp);
+
+// Include a polyfill for setPrototypeOf - taken from MDN
+// Only works in Chrome and FireFox, does not work in IE:
+Object.setPrototypeOf = Object.setPrototypeOf || function (obj, proto) {
+    obj.__proto__ = proto;
+    return obj;
+  };
