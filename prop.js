@@ -68,10 +68,7 @@ function create(props) {
   prop._writ(props.writable);
   prop._conf(props.configurable);
   Object.defineProperty(prop, 'value',
-    Object.assign(
-      Object.getOwnPropertyDescriptor(props, 'value'),
-      {configurable:true}
-    )
+    Object.getOwnPropertyDescriptor(props, 'value')
   );
   return prop;
 }
