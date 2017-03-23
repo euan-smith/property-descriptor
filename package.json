@@ -4,8 +4,8 @@
   "description": "An ES-5 object property descriptor factory",
   "main": "lib/prop.js",
   "scripts": {
-    "build": "mkdir lib && babel prop.js -o lib/prop.js --presets ES2015",
-    "test": "npm build && mocha",
+    "build": "rimraf lib && mkdir lib && babel prop.js -o lib/prop.js --presets ES2015",
+    "test": "npm run build && mocha",
     "coverage": "nyc npm test",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls"
   },
@@ -32,7 +32,8 @@
     "coveralls": "^2.12.0",
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.3.0",
-    "nyc": "^10.1.2"
+    "nyc": "^10.1.2",
+    "rimraf": "^2.6.1"
   },
   "author": "Euan Smith <euan1971@yahoo.co.uk> (https://github.com/zakalwe314)",
   "license": "MIT",
