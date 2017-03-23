@@ -21,17 +21,17 @@ const defaultProp = {
  * all methods are chainable
  */
 const propProto = {
-  _enum(v){
+  _enum: function(v){
     this.enumerable=v;
     return this;
   },
 
-  _writ(v){
+  _writ: function(v){
     this.writable=v;
     return this;
   },
 
-  _conf(v){
+  _conf: function(v){
     this.configurable=v;
     return this;
   },
