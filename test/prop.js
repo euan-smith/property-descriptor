@@ -3,7 +3,7 @@
  */
 
 const prop = require('../prop');
-const {expect} = require('chai');
+const expect = require('chai').expect;
 
 describe('prop',function(){
   it('defined a property on an object',function(){
@@ -12,7 +12,7 @@ describe('prop',function(){
     ).to.have.a.property('test').that.equals(5);
   });
   it('defines an instance property', function(){
-    const d=prop(()=>[]);
+    const d=prop(function(){return []});
     const t1=Object.defineProperty({},'test',d);
     const t2=Object.defineProperty({},'test',d);
     expect(t1).to.have.a.property('test').that.is.an.instanceOf(Array);
@@ -20,7 +20,7 @@ describe('prop',function(){
     expect(t1.test).to.not.equal(t2.test);
   });
   it('defines an instance maintained through chaining', function(){
-    const d=prop(()=>[]).visible;
+    const d=prop(function(){return []}).visible;
     const t1=Object.defineProperty({},'test',d);
     const t2=Object.defineProperty({},'test',d);
     expect(t1).to.have.a.property('test').that.is.an.instanceOf(Array);
@@ -28,8 +28,8 @@ describe('prop',function(){
     expect(t1.test).to.not.equal(t2.test);
   });
   it('chaining does not trigger the instance call', function(){
-    let cnt=0;
-    const d = prop(()=>++cnt).visible;
+    var cnt=0;
+    const d = prop(function(){return ++cnt}).visible;
     expect(cnt).to.equal(0);
     Object.defineProperty({},'idx',d);
     expect(cnt).to.equal(1);
@@ -57,7 +57,7 @@ describe('prop',function(){
   it('can be used to set (for example) a constant enum', function(){
     const enumProp = prop().hidden.constant;
     const TYPE3=enumProp(2);
-    const o=Object.create(null,{TYPE3});
+    const o=Object.create(null,{TYPE3:TYPE3});
     expect(o.TYPE3).to.equal(2);
     expect(Object.keys(o).length).to.equal(0);
     o.TYPE3=5;
