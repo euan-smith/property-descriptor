@@ -2,9 +2,10 @@
   "name": "prop-d",
   "version": "1.1.0",
   "description": "An ES-5 object property descriptor factory",
-  "main": "prop.js",
+  "main": "lib/prop.js",
   "scripts": {
-    "test": "mocha",
+    "build": "mkdir lib && babel prop.js -o lib/prop.js --presets ES2015",
+    "test": "npm build && mocha",
     "coverage": "nyc npm test",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls"
   },
@@ -25,6 +26,8 @@
     "Object.create"
   ],
   "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
     "chai": "^3.5.0",
     "coveralls": "^2.12.0",
     "mocha": "^3.2.0",

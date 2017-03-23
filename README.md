@@ -144,9 +144,8 @@ In lieu of a coding style, please use the style of the existing code as an examp
   - Removed some code that had become unessesary due to the above change.
   - Reduced the code size a little
   - Added a restriction on node version to package.json
-
-# Todo
-- Remove ES6 dependency
+- 1.2.0
+  - Added a babel build process to remove ES6 requirement
 
 #License
 
