@@ -4,7 +4,7 @@
   "description": "An ES-5 object property descriptor factory",
   "main": "lib/prop.js",
   "scripts": {
-    "build": "rimraf lib && mkdir lib && babel prop.js -o lib/prop.js --presets ES2015",
+    "build": "rimraf lib && mkdir lib && babel prop.js -o lib/prop.js",
     "test": "npm run build && mocha",
     "coverage": "nyc npm test",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls"
@@ -15,6 +15,9 @@
   },
   "engines": {
     "node": ">=4.0.0"
+  },
+  "babel":{
+    "presets":["ES2015"]
   },
   "keywords": [
     "ES5",
