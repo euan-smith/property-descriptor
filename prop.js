@@ -3,6 +3,10 @@
  */
 
 
+/**
+ *
+ * The default properties
+ */
 const defaultProp = {
   writable: true,
   enumerable: true,
@@ -12,53 +16,54 @@ const defaultProp = {
 
 
 /**
- * @class Prop
  *
+ * The prototype for the prop object
+ * all methods are chainable
  */
-class Prop extends Function {
+const propProto = {
   _enum(v){
     this.enumerable=v;
     return this;
-  }
+  },
 
   _writ(v){
     this.writable=v;
     return this;
-  }
+  },
 
   _conf(v){
     this.configurable=v;
     return this;
-  }
+  },
 
   get hidden() {
     return create(this)._enum(false);
-  }
+  },
 
   get visible() {
     return create(this)._enum(true);
-  }
+  },
 
   get constant() {
     return create(this)._writ(false);
-  }
+  },
 
   get variable() {
     return create(this)._writ(true);
-  }
+  },
 
   get frozen() {
     return create(this)._conf(false);
-  }
+  },
 
   get thawed() {
     return create(this)._conf(true);
   }
-}
+};
 
 function create(props) {
   const prop = makeTarget();
-  Object.setPrototypeOf(prop, Prop.prototype);
+  Object.setPrototypeOf(prop, propProto);
   prop._enum(props.enumerable);
   prop._writ(props.writable);
   prop._conf(props.configurable);

@@ -2,7 +2,7 @@
  * Created by euans on 20/02/2017.
  */
 
-const prop = require('../lib/prop');
+const prop = require('../prop');
 const {expect} = require('chai');
 
 describe('prop',function(){
