@@ -2,19 +2,6 @@
  * @module prop
  */
 
-
-/**
- *
- * The default properties
- */
-const defaultProp = {
-  writable: true,
-  enumerable: true,
-  configurable: false,
-  value: undefined
-};
-
-
 /**
  *
  * The prototype for the prop object
@@ -58,18 +45,33 @@ const propProto = {
 
   get thawed() {
     return create(this)._conf(true);
-  }
+  },
+
+  writable: true,
+
+  enumerable: true,
+
+  configurable: false,
+
+  value: undefined
 };
+
+const propDesc = Object.keys(propProto).reduce(function(d,k){
+  d[k]=Object.getOwnPropertyDescriptor(propProto,k);
+  return d;
+},{});
 
 function create(props) {
   const prop = makeTarget();
-  Object.setPrototypeOf(prop, propProto);
-  prop._enum(props.enumerable);
-  prop._writ(props.writable);
-  prop._conf(props.configurable);
-  Object.defineProperty(prop, 'value',
-    Object.getOwnPropertyDescriptor(props, 'value')
-  );
+  Object.defineProperties(prop, propDesc);
+  if (props){
+    prop._enum(props.enumerable);
+    prop._writ(props.writable);
+    prop._conf(props.configurable);
+    Object.defineProperty(prop, 'value',
+      Object.getOwnPropertyDescriptor(props, 'value')
+    );
+  }
   return prop;
 }
 
@@ -88,11 +90,4 @@ function makeTarget() {
   return prop;
 }
 
-module.exports = create(defaultProp);
-
-// Include a polyfill for setPrototypeOf - taken from MDN
-// Only works in Chrome and FireFox, does not work in IE:
-Object.setPrototypeOf = Object.setPrototypeOf || function (obj, proto) {
-    obj.__proto__ = proto;
-    return obj;
-  };
+module.exports = create();
