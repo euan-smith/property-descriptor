@@ -96,6 +96,34 @@ o1.d(4);// returns 5;
 
 ```
 
+Using an instance generating method can also allow things like auto-incrementing ids:
+```
+const prop = require('prop-d');
+
+var counter=0;
+
+const proto={
+  get id(){return this._id}
+}
+
+const props={
+  _id: prop(()=>counter++),
+  foo: prop('foo')
+}
+
+function create(){
+  return Object.create(proto,props);
+}
+
+//...
+
+var o1=create();
+//{id:0, foo:'foo'}
+var o2=create();
+//{id:1, foo:'foo'}
+
+```
+
 ### Methods of the prop object
 There are six chainable properties of the object returned by `prop()` which modify the descriptor, two for each of the 
 three boolean descriptor properties: 
@@ -106,8 +134,13 @@ three boolean descriptor properties:
 | writable | .variable | .constant |
 | configurable | .thawed | .frozen |
 
+For example:
+```
+console.log(prop('foo').hidden.constant)
+// {enumerable: false, writable: false, configurable: false, value: 'foo'}
+```
 
-### Making a new root object
+### All prop methods make a new root object
 
 If you are making a lot of constant or hidden variables, it can be tedius to write them out all the time (and not as DRY as we would like), so there is one other trick up `prop`'s sleeve.  Every prop object can act as a root method exacly as the `prop` object itself.
 
@@ -126,9 +159,33 @@ const barProps = {
 }
 ```
 
+This also means that you can use a variety of styles depending on taste.  All of the following examples do the same thing:
+```
+const prop = require('prop-d');
+var fooDescriptor = prop('foo').hidden.constant;
+```
+```
+const prop = require('prop-d');
+var fooDescriptor = prop.hidden.constant('foo');
+```
+```
+const {hidden} = require('prop-d');
+var fooDescriptor = hidden('foo').constant;
+```
+```
+const {hidden:{constant:hc_prop}} = require('prop-d');
+var fooDescriptor = hc_prop('foo');
+```
+
 # Testing
+run mocha tests
 ```
 npm test
+```
+run mocha tests with nyc for coverage
+
+```
+npm run coverage
 ```
 
 # Contributing
@@ -148,8 +205,9 @@ In lieu of a coding style, please use the style of the existing code as an examp
   - Removed much of the ES6 dependency and shimmed the last bit.
 - 1.2.1
   - Stopped messing with the prototype chain and just added the required methods and getters to the return function.
+  - Now passing tests for node versions from 0.12 to 7 and iojs.
 
-#License
+# License
 
 Copyright (c) 2017 Euan Smith
 
