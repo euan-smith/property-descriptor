@@ -56,8 +56,12 @@ const propProto = {
   value: undefined
 };
 
+// Reduce the prototype to a property descriptor object
 const propDesc = Object.keys(propProto).reduce(function(d,k){
   d[k]=Object.getOwnPropertyDescriptor(propProto,k);
+  // hide all getter and function properties
+  if (!d[k].hasOwnProperty('value') || typeof d[k].value === "function")
+    d[k].enumerable=false;
   return d;
 },{});
 
