@@ -203,8 +203,9 @@ In lieu of a coding style, please use the style of the existing code as an examp
   - Added a restriction on node version to package.json
 - 1.2.0
   - Removed much of the ES6 dependency and shimmed the last bit.
-- 1.2.1
+- 1.3.0
   - Stopped messing with the prototype chain and just added the required methods and getters to the return function.
+  - Removed the shim of setPrototypeOf
   - Now passing tests for node versions from 0.12 to 7 and iojs.
 
 # License
