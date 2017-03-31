@@ -1,8 +1,9 @@
 # prop-d
 An ES-5 object property descriptor factory.
 
-![tests](https://travis-ci.org/zakalwe314/property-descriptor.svg?branch=master)
+[![Build Status](https://travis-ci.org/zakalwe314/property-descriptor.svg?branch=master)](https://travis-ci.org/zakalwe314/property-descriptor)
 [![Coverage Status](https://coveralls.io/repos/zakalwe314/property-descriptor/badge.svg?branch=master)](https://coveralls.io/r/zakalwe314/property-descriptor?branch=master)
+[![Code Climate](https://codeclimate.com/github/zakalwe314/property-descriptor/badges/gpa.svg)](https://codeclimate.com/github/zakalwe314/property-descriptor)
 
 ## Description
 
@@ -207,6 +208,9 @@ In lieu of a coding style, please use the style of the existing code as an examp
   - Stopped messing with the prototype chain and just added the required methods and getters to the return function.
   - Removed the shim of setPrototypeOf
   - Now passing tests for node versions from 0.12 to 7 and iojs.
+- 1.3.1
+  - Minor change to remove a little unnecessary complexity.
+  - Added code climate to the list of badges
 
 # License
 
