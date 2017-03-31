@@ -45,8 +45,10 @@ const propProto = {
 
   get thawed() {
     return create(this)._conf(true);
-  },
+  }
+};
 
+const defaults = {
   writable: true,
 
   enumerable: true,
@@ -59,23 +61,20 @@ const propProto = {
 // Reduce the prototype to a property descriptor object
 const propDesc = Object.keys(propProto).reduce(function(d,k){
   d[k]=Object.getOwnPropertyDescriptor(propProto,k);
-  // hide all getter and function properties
-  if (!d[k].hasOwnProperty('value') || typeof d[k].value === "function")
-    d[k].enumerable=false;
+  // hide all inherited properties
+  d[k].enumerable=false;
   return d;
 },{});
 
 function create(props) {
   const prop = makeTarget();
   Object.defineProperties(prop, propDesc);
-  if (props){
-    prop._enum(props.enumerable);
-    prop._writ(props.writable);
-    prop._conf(props.configurable);
-    Object.defineProperty(prop, 'value',
-      Object.getOwnPropertyDescriptor(props, 'value')
-    );
-  }
+  prop._enum(props.enumerable);
+  prop._writ(props.writable);
+  prop._conf(props.configurable);
+  Object.defineProperty(prop, 'value',
+    Object.getOwnPropertyDescriptor(props, 'value')
+  );
   return prop;
 }
 
@@ -94,4 +93,4 @@ function makeTarget() {
   return prop;
 }
 
-module.exports = create();
+module.exports = create(defaults);
