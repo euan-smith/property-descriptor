@@ -24,73 +24,70 @@ const propProto = {
   },
 
   get hidden() {
-    return create(this)._enum(false);
+    return clone(this)._enum(false);
   },
 
   get visible() {
-    return create(this)._enum(true);
+    return clone(this)._enum(true);
   },
 
   get constant() {
-    return create(this)._writ(false);
+    return clone(this)._writ(false);
   },
 
   get variable() {
-    return create(this)._writ(true);
+    return clone(this)._writ(true);
   },
 
   get frozen() {
-    return create(this)._conf(false);
+    return clone(this)._conf(false);
   },
 
   get thawed() {
-    return create(this)._conf(true);
+    return clone(this)._conf(true);
   }
 };
 
+//The default descriptor properties
 const defaults = {
   writable: true,
-
   enumerable: true,
-
   configurable: false,
-
   value: undefined
 };
 
 // Reduce the prototype to a property descriptor object
 const propDesc = Object.keys(propProto).reduce(function(d,k){
+  //for each prototype property get the descriptor and add it to the descriptor object
   d[k]=Object.getOwnPropertyDescriptor(propProto,k);
-  // hide all inherited properties
+  //hide all inherited properties
   d[k].enumerable=false;
   return d;
 },{});
 
-function create(props) {
-  const prop = makeTarget();
-  Object.defineProperties(prop, propDesc);
-  prop._enum(props.enumerable);
-  prop._writ(props.writable);
-  prop._conf(props.configurable);
-  Object.defineProperty(prop, 'value',
-    Object.getOwnPropertyDescriptor(props, 'value')
+// Make a clone of a prop object
+function clone(source) {
+  const target = makeTarget();
+  Object.defineProperties(target, propDesc);
+  target._enum(source.enumerable);
+  target._writ(source.writable);
+  target._conf(source.configurable);
+  Object.defineProperty(target, 'value',
+    Object.getOwnPropertyDescriptor(source, 'value')
   );
-  return prop;
+  return target;
 }
 
 function makeTarget() {
   const prop = function (val, isMethod) {
-    var rtn = create(prop);
+    var newProp = clone(prop);
     if (arguments.length > 0) {
-      if (typeof val === 'function' && !isMethod) {
-        Object.defineProperty(rtn, 'value', {get: val});
-      } else {
-        Object.defineProperty(rtn, 'value', {value: val});
-      }
+      const isFactory = typeof val === 'function' && !isMethod;
+      Object.defineProperty(newProp, 'value', isFactory ? {get: val} : {value: val});
     }
-    return rtn;
+    return newProp;
   };
   return prop;
 }
 
-module.exports = create(defaults);
+module.exports = clone(defaults);
