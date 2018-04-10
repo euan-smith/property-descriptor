@@ -83,9 +83,7 @@ function makeTarget() {
   return function prop (val, isMethod) {
     var newProp = clone(prop);
     const isFactory = typeof val === 'function' && !isMethod;
-    if (arguments.length > 0) {
-      Object.defineProperty(newProp, 'value', isFactory ? {get: val} : {value: val});
-    }
+    Object.defineProperty(newProp, 'value', isFactory ? {get: val} : {value: val});
     return newProp;
   };
 }
