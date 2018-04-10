@@ -78,16 +78,16 @@ function clone(source) {
   return target;
 }
 
+// Make a new base prop object
 function makeTarget() {
-  const prop = function (val, isMethod) {
+  return function prop (val, isMethod) {
     var newProp = clone(prop);
+    const isFactory = typeof val === 'function' && !isMethod;
     if (arguments.length > 0) {
-      const isFactory = typeof val === 'function' && !isMethod;
       Object.defineProperty(newProp, 'value', isFactory ? {get: val} : {value: val});
     }
     return newProp;
   };
-  return prop;
 }
 
 module.exports = clone(defaults);
